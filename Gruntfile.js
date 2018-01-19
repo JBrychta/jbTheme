@@ -87,29 +87,43 @@ module.exports = function (grunt) {
     },
     watch: {
       grunt: {files: ['Gruntfile.js']},
+      options: {
+        spawn: false
+      },
       sass: {
         files: ['scss/*.scss', 'scss/**/*.scss'],
-        tasks: ['sass', 'autoprefixer']
+        tasks: ['sass', 'autoprefixer', 'bsReload:css']
       },
       icons: {
         files: ['icons/source/*.svg', 'icons/source/*.png'],
-        tasks: ['svgmin', 'grunticon']
+        tasks: ['svgmin', 'grunticon', 'bsReload:all']
       },
       js: {
         files: ['js/*.js'],
-        tasks: ['uglify:dist']
+        tasks: ['uglify:dist', 'bsReload:js']
       }
     },
     clean: {
-      build: ['dist', '!dist/.gitignore']
+      build: ['dist', '!dist/.gitignore'],
+      icons: ['icons/source-svg-min']
     },
     browserSync: {
-      bsFiles: {
-        src: 'dist/*'
+      dev: {
+        options: {
+          proxy: 'example.com',
+          background: true
+        }
+      }
+    },
+    bsReload: {
+      css: {
+        reload: 'dev/style.css'
       },
-      options: {
-        watchTask: true,
-        proxy: 'example.com'
+      js: {
+        reload: 'dev/js/*'
+      },
+      all: {
+        reload: true
       }
     }
   });
@@ -124,7 +138,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-browser-sync');
 
-  grunt.registerTask('default', ['browserSync', 'watch']);
+  grunt.registerTask('default', ['sass', 'autoprefixer', 'uglify:dist', 'svgmin', 'grunticon', 'browserSync', 'watch']);
   grunt.registerTask('styles', ['sass', 'autoprefixer']);
   grunt.registerTask('icons', ['svgmin', 'grunticon']);
   grunt.registerTask('prod', ['clean', 'sass', 'autoprefixer', 'cssmin', 'uglify:prod', 'svgmin', 'grunticon']);
