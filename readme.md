@@ -16,7 +16,7 @@ Installation quide
   1. Run `grunt prod` before deploying theme to server
 
 ## What if I don't want to use Bootstrap?
-No problem, I've started using it recently and only some parts of it. If you don't want use it, just delete scss/bootstrap folder and remove importing of those feiles in scss/style.scss
+No problem, I've started using it recently and only some parts of it. If you don't want use it, just delete scss/bootstrap folder and remove @import rows (1-9) from scss/style.scss
 
 ## How to use Grunticon?
 Basically, just run `grunt` and copy your (.svg) icons into icons/source folder. Once you do that, Grunt runs all tasks
@@ -39,8 +39,8 @@ preprocess = no
 
 allowDelete = yes
 
-before full/path/to/Gruntfile.js grunt prod
+before[] = local: grunt --gruntfile /full/path/to/Gruntfile.js prod
 ```
 
 ## No minification?
-No. Use plugin like [Autoptimize](https://cs.wordpress.org/plugins/autoptimize/) to do this for you
+No. Use plugin like [Autoptimize](https://wordpress.org/plugins/autoptimize/) to do this for you
