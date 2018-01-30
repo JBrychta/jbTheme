@@ -1,6 +1,6 @@
 # WordPress starter theme
 
-Basic wordpress coding workflow using Grunt with SASS, AutoPrefixer, Grunticon
+WordPress starter theme. Automatized taskts that process SASS, applies Autoprefixer, minifies CSS and JS, compresses images and handles SVG icons
 
 Installation quide
 1. Install [npm](https://docs.npmjs.com/)
@@ -41,6 +41,3 @@ allowDelete = yes
 
 before[] = local: grunt --gruntfile /full/path/to/Gruntfile.js prod
 ```
-
-## No minification?
-No. Use plugin like [Autoptimize](https://wordpress.org/plugins/autoptimize/) to do this for you

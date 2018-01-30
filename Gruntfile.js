@@ -61,6 +61,16 @@ module.exports = function (grunt) {
         }
       }
     },
+    imagemin: {
+      dist: {
+        files: [{
+            expand: true,
+            cwd: 'img/',
+            src: ['*.{png,jpg,gif}'],
+            dest: 'dist/img/'
+          }]
+      }
+    },
     uglify: {
       dist: {
         options: {
@@ -97,6 +107,10 @@ module.exports = function (grunt) {
       icons: {
         files: ['icons/source/*.svg', 'icons/source/*.png'],
         tasks: ['svgmin', 'grunticon', 'bsReload:all']
+      },
+      images: {
+        files: ['img/*'],
+        tasks: ['imagemin']
       },
       js: {
         files: ['js/*.js'],
@@ -137,10 +151,11 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-browser-sync');
+  grunt.loadNpmTasks('grunt-contrib-imagemin');
 
-  grunt.registerTask('default', ['sass', 'autoprefixer', 'uglify:dist', 'svgmin', 'grunticon', 'browserSync', 'watch']);
+  grunt.registerTask('default', ['sass', 'uglify:dist', 'svgmin', 'grunticon', 'imagemin', 'browserSync', 'watch']);
   grunt.registerTask('styles', ['sass', 'autoprefixer']);
   grunt.registerTask('icons', ['svgmin', 'grunticon']);
-  grunt.registerTask('prod', ['clean', 'sass', 'autoprefixer', 'cssmin', 'uglify:prod', 'svgmin', 'grunticon']);
+  grunt.registerTask('prod', ['clean', 'sass', 'autoprefixer', 'cssmin', 'uglify:prod', 'svgmin', 'imagemin', 'grunticon']);
 
 };
