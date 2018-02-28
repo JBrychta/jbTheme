@@ -1,5 +1,2 @@
-jQuery(document).ready(function($){
-  
-  console.log($);    
-  
-});
+import jQuery from 'jquery';
+import boostrap from 'bootstrap';

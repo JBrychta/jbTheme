@@ -1,3 +1,5 @@
+const webpackConfig = require('./webpack.config');
+
 module.exports = function (grunt) {
 
   // Project configuration.
@@ -74,29 +76,13 @@ module.exports = function (grunt) {
           }]
       }
     },
-    uglify: {
-      dist: {
-        options: {
-          mangle: false,
-          beautify: true
-        },
-        files: [{
-            expand: true,
-            src: 'js/*.js',
-            dest: 'dist'
-          }]
+    webpack: {
+      options: {
+        stats: false,
+        progress: false,
+        watch: false,
       },
-      prod: {
-        options: {
-          mangle: false,
-          beautify: false
-        },
-        files: [{
-            expand: true,
-            src: 'js/*.js',
-            dest: 'dist'
-          }]
-      }
+      dist: webpackConfig
     },
     watch: {
       grunt: {files: ['Gruntfile.js']},
@@ -117,7 +103,7 @@ module.exports = function (grunt) {
       },
       js: {
         files: ['js/*.js'],
-        tasks: ['uglify:dist', 'bsReload:js']
+        tasks: ['webpack', 'bsReload:js']
       }
     },
     clean: {
@@ -163,17 +149,17 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-autoprefixer');
   grunt.loadNpmTasks('grunt-svgmin');
   grunt.loadNpmTasks('grunt-grunticon');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-browser-sync');
   grunt.loadNpmTasks('grunt-contrib-imagemin');
+  grunt.loadNpmTasks('grunt-webpack');
   grunt.loadNpmTasks('grunt-wp-i18n');
 
-  grunt.registerTask('default', ['sass', 'uglify:dist', 'svgmin', 'grunticon', 'imagemin', 'browserSync', 'watch']);
+  grunt.registerTask('default', ['sass', 'webpack', 'svgmin', 'grunticon', 'imagemin', 'browserSync', 'watch']);
   grunt.registerTask('styles', ['sass', 'autoprefixer']);
   grunt.registerTask('icons', ['svgmin', 'grunticon']);
-  grunt.registerTask('prod', ['clean', 'sass', 'autoprefixer', 'cssmin', 'uglify:prod', 'svgmin', 'imagemin', 'grunticon', 'makepot']);
+  grunt.registerTask('prod', ['clean', 'sass', 'autoprefixer', 'cssmin', 'webpack', 'svgmin', 'imagemin', 'grunticon', 'makepot']);
 
 };
