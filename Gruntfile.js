@@ -124,6 +124,19 @@ module.exports = function (grunt) {
       build: ['dist', '!dist/.gitignore'],
       icons: ['icons/source-svg-min']
     },
+    makepot: {
+      target: {
+        options: {
+          domainPath: 'lang',
+          mainFile: 'style.css',
+          potHeaders: {
+            'language': 'cs',
+            poedit: true,
+          },
+          type: 'wp-theme',
+        }
+      }
+    },
     browserSync: {
       dev: {
         options: {
@@ -156,10 +169,11 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-browser-sync');
   grunt.loadNpmTasks('grunt-contrib-imagemin');
+  grunt.loadNpmTasks('grunt-wp-i18n');
 
   grunt.registerTask('default', ['sass', 'uglify:dist', 'svgmin', 'grunticon', 'imagemin', 'browserSync', 'watch']);
   grunt.registerTask('styles', ['sass', 'autoprefixer']);
   grunt.registerTask('icons', ['svgmin', 'grunticon']);
-  grunt.registerTask('prod', ['clean', 'sass', 'autoprefixer', 'cssmin', 'uglify:prod', 'svgmin', 'imagemin', 'grunticon']);
+  grunt.registerTask('prod', ['clean', 'sass', 'autoprefixer', 'cssmin', 'uglify:prod', 'svgmin', 'imagemin', 'grunticon', 'makepot']);
 
 };

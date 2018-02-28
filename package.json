@@ -20,6 +20,7 @@
     "grunt-contrib-uglify": "^3.3.0",
     "grunt-contrib-watch": "^1.0.0",
     "grunt-grunticon": "^2.3.2",
-    "grunt-svgmin": "^4.0.0"
+    "grunt-svgmin": "^4.0.0",
+    "grunt-wp-i18n": "^1.0.1"
   }
 }
