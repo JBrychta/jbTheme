@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "popper.js": "^1.14.3",
     "bootstrap": "^4.0.0",
     "grunt": "^1.0.1",
     "grunt-autoprefixer": "^3.0.4",
