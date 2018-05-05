@@ -34,7 +34,7 @@ function jbrychta_add_styles() {
   wp_enqueue_style('main', get_template_directory_uri() . '/dist/style.css', array(), $version, 'all');
 
   wp_enqueue_script('grunticon', get_template_directory_uri() . '/dist/grunticon.loader.js', array('jquery'), $version);
-  wp_enqueue_script('main', get_template_directory_uri() . '/dist/js/main.js', array('jquery'), $version);
+  wp_enqueue_script('main', get_template_directory_uri() . '/dist/main.js', array('jquery'), $version);
 }
 
 add_action('wp_enqueue_scripts', 'jbrychta_add_styles');
